@@ -25,10 +25,10 @@ public class HouseController {
     }     
   
     @GetMapping
-    public String index(@RequestParam(name = "keyword", required = false) String keyword,
-                        @RequestParam(name = "area", required = false) String area,
-                        @RequestParam(name = "price", required = false) Integer price,  
-                         @RequestParam(name = "order", required = false) String order,
+    public String index(@RequestParam(required = false) String keyword,
+                        @RequestParam(required = false) String area,
+                        @RequestParam(required = false) Integer price,  
+                         @RequestParam(required = false) String order,
                         @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
                         Model model) 
     {
@@ -70,7 +70,7 @@ public class HouseController {
     }
     
     @GetMapping("/{id}")
-    public String show(@PathVariable(name = "id") Integer id, Model model) {
+    public String show(@PathVariable Integer id, Model model) {
         House house = houseRepository.getReferenceById(id);
         
         model.addAttribute("house", house);  

@@ -55,7 +55,7 @@ public class ReservationController {
     }
     
     @GetMapping("/houses/{id}/reservations/input")
-    public String input(@PathVariable(name = "id") Integer id,
+    public String input(@PathVariable Integer id,
                         @ModelAttribute @Validated ReservationInputForm reservationInputForm,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes,
@@ -84,7 +84,7 @@ public class ReservationController {
     }
     
     @GetMapping("/houses/{id}/reservations/confirm")
-    public String confirm(@PathVariable(name = "id") Integer id,
+    public String confirm(@PathVariable Integer id,
                           @ModelAttribute ReservationInputForm reservationInputForm,
                           @AuthenticationPrincipal UserDetailsImpl userDetailsImpl,  
                            HttpServletRequest httpServletRequest,

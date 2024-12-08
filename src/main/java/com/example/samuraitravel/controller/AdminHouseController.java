@@ -34,7 +34,7 @@ public class AdminHouseController {
     }	
     
     @GetMapping            
-     public String index(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable, @RequestParam(name = "keyword", required = false) String keyword) {        
+     public String index(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable, @RequestParam(required = false) String keyword) {        
         Page<House> housePage;
         
         if (keyword != null && !keyword.isEmpty()) {
@@ -50,7 +50,7 @@ public class AdminHouseController {
     } 
     
     @GetMapping("/{id}")
-    public String show(@PathVariable(name = "id") Integer id, Model model) {
+    public String show(@PathVariable Integer id, Model model) {
         House house = houseRepository.getReferenceById(id);
         
         model.addAttribute("house", house);
@@ -77,7 +77,7 @@ public class AdminHouseController {
     } 
     
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable(name = "id") Integer id, Model model) {
+    public String edit(@PathVariable Integer id, Model model) {
         House house = houseRepository.getReferenceById(id);
         String imageName = house.getImageName();
         HouseEditForm houseEditForm = new HouseEditForm(house.getId(), house.getName(), null, house.getDescription(), house.getPrice(), house.getCapacity(), house.getPostalCode(), house.getAddress(), house.getPhoneNumber());
@@ -101,7 +101,7 @@ public class AdminHouseController {
     }   
     
      @PostMapping("/{id}/delete")
-     public String delete(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes) {        
+     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {        
          houseRepository.deleteById(id);
                  
          redirectAttributes.addFlashAttribute("successMessage", "民宿を削除しました。");
